@@ -6,6 +6,20 @@
             <p class="signup-link">Already have an account? <router-link to="/">Login</router-link></p>
 
             <div class="form-group">
+                <label for="email" class="form-label">Name</label>
+                <input type="email" id="email"  
+                class="form-control form-input">
+                <div  class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email"  
+                class="form-control form-input">
+                <div  class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="email"  
                 class="form-control form-input">
