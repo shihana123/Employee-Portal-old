@@ -43,7 +43,7 @@ class AuthController extends Controller
             return response([
                 'user' => auth()->user(),
                 'access_token' => $token,
-                
+                'status' => 200
             ], Response::HTTP_OK);
         }
         else 

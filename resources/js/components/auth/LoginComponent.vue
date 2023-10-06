@@ -23,7 +23,7 @@
                     <button type="button" class="password-toggle" ></button>
                 </div>
             </div> -->
-            <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+            <p v-if="errorMessage" class="error text-danger" >{{ errorMessage }}</p>
             <button type="submit" class="btn btn-primary">Login</button>
             <!-- <p class="forgot-password-link">Forgot your password? <a href="#">Click here</a></p> -->
         </Form>
@@ -37,10 +37,7 @@
     import { Form, Field, ErrorMessage } from 'vee-validate';
     import * as yup from 'yup';
     import axios from 'axios';
-    import { useRouter } from "vue-router";
     
-
-    const router = useRouter();
 
     function showError() {
         show_error.value =true
@@ -68,23 +65,23 @@
             {
                 // console.log(values);
                 axios.post('api/login', values).then(res => {
-                  
+                        
+                        if(res.data.user.user_type == 1){
+                            console.log('admin');
+                            this.$router.push({ name: 'AdminDashboard' });
+                        } 
+                        else{
+                            this.$router.push({ name: "employer-dashboard"});
+                        }
+
+                }).catch(err =>{    
                     
-                        console.log(res.response.data);
-                        // if(res.data.role == 1){
-                        //     console.log('admin');
-                        //     router.push({ name: "About"});
-                        // } 
-                        // else{
-                        //     // router.push({ name: "employer-dashboard"});
-                        // }
+                    if(err.response.data.message)
+                    {
+                        this.errorMessage = err.response.data.message;
+                    }
                     
-                    
-                    
-                }).catch(err =>{
-                    console.log(err.response.data.message);
-                    this.errorMessage = err.response.data.message;
-                })
+                });
             },
             
         }

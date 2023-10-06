@@ -4,7 +4,9 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
     { path: '/', name: 'Home', component: () => import('../components/auth/LoginComponent.vue')},
-    { path: '/signup', name: 'About', component: () => import('../components/auth/RegisterComponent.vue') }
+    { path: '/signup', name: 'About', component: () => import('../components/auth/RegisterComponent.vue') },
+
+    { path: '/dashboardAdmin', name: 'AdminDashboard', component: () => import('../components/admin/DashboardComponent.vue') }
 ];
 
 const router = createRouter({
