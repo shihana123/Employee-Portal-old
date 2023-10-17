@@ -20,13 +20,22 @@ class AdminSeeder extends Seeder
         //     'email' => Str::random(10).'@gmail.com',
         //     'password' => Hash::make('password'),
         // ]);
+        DB::table('users')->truncate();
 
-        DB::table('users')->insert([
+        $data = [[
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123'),
             'user_type' => 1,
             'status' => 1
-        ]);
+        ],
+        [
+            'name' => 'employee',
+            'email' => 'emp@gmail.com',
+            'password' => Hash::make('123'),
+            'user_type' => 2,
+            'status' => 1
+        ]];
+        DB::table('users')->insert($data);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +12,14 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    use AuthenticatesUsers;
+    protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -35,7 +45,7 @@ class AuthController extends Controller
         $role = $user->user_type;
         $user->token = $token;
         $user->role = $role;
-
+        
         if(Auth::attempt($credentials))
         {
             $user = Auth::user();
@@ -63,5 +73,10 @@ class AuthController extends Controller
         //     return response()->json(['error' => 'Unauthorized'], 401);
         // }
         
+    }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard');
     }
 }

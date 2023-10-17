@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => 'auth:sanctum'], function() {
-    // Route::post('/login', [AdminController::class, 'login']);
+Route::middleware(['auth', 'user-access:1'])->group(function () {
+    Route::post('/dashboard', [AdminController::class, 'dashboard']);
 });
