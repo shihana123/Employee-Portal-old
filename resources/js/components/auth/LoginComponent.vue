@@ -65,9 +65,10 @@
             {
                 // console.log(values);
                 axios.post('api/login', values).then(res => {
-                        
+                        localStorage.setItem('user_type', res.data.user.user_type);
                         if(res.data.user.user_type == 1){
-                            localStorage.setItem('authToken', res.data.user.access_token);
+                            
+                            
                             this.$router.push({ name: 'AdminDashboard' });
                         } 
                         else{

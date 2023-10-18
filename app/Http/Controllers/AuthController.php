@@ -41,7 +41,7 @@ class AuthController extends Controller
             ], Response::HTTP_UNAUTHORIZED);
         }  
 
-        $token = $user->createToken('main')->plainTextToken;
+        $token = $user->createToken('auth_token')->plainTextToken;;
         $role = $user->user_type;
         $user->token = $token;
         $user->role = $role;
